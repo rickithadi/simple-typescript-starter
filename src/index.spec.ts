@@ -7,13 +7,13 @@ describe('test', () => {
   });
 });
 
-// describe('check deploy status of release', () => {
-//   it('deployed release returns true', () => {
-//     const result = checkReleaseDeployStatus(releases[0]);
-//     expect(result).toBe(true);
-//   });
-//   it('undeployed release returns false', () => {
-//     const result = checkReleaseDeployStatus(releases[1]);
-//     expect(result).toBe(false);
-//   });
-// });
+describe('check deploy status of release', () => {
+  it('deployed release returns true', () => {
+    const result = checkReleaseDeployStatus(releases[0]);
+    expect(result).toBe(true);
+  });
+  it('undeployed release returns false', () => {
+    const result = checkReleaseDeployStatus(releases[1]);
+    expect(result).toBe(false);
+  });
+});

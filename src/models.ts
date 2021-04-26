@@ -6,7 +6,7 @@ export interface Deploy {
   Id: string;
   ReleaseId: string;
   EnvironmentId: string;
-  DeployedAt: Date;
+  DeployedAt: string;
 }
 export interface Project {
   Id: string;
