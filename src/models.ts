@@ -1,6 +1,6 @@
 export interface Environment {
   Id: string;
-  name: string;
+  Name: string;
 }
 export interface Deploy {
   Id: string;
@@ -10,7 +10,7 @@ export interface Deploy {
 }
 export interface Project {
   Id: string;
-  name: string;
+  Name: string;
 }
 export interface Release {
   Id: string;
