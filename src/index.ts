@@ -38,16 +38,16 @@ export function searchReleases(
     release => release.ProjectId === project.Id,
   );
   //look for corresponding deploys via environmentId ASSUMING fewer environments than releases
-  // searchReleases(projectId):releases[]
   const deployList = globalDeployments.filter(
     deploy => deploy.EnvironmentId === environment.Id,
   );
   //use Date.parse on deploy dates to get most recently deployed releases
-  // deployList.sort
   const releaseIdskeep = deployList
     .sort((a, b) => Date.parse(b.DeployedAt) - Date.parse(a.DeployedAt))
     .map(deploy => deploy.ReleaseId);
 
-  console.log('keeping releases', releaseIdskeep);
-  return globalReleases;
+  //return list of releases for corresponding project according to releaseId list
+  return releaseList
+    .filter(release => releaseIdskeep.includes(release.Id))
+    .slice(0, releasesToKeep);
 }

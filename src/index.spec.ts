@@ -29,13 +29,15 @@ describe('check release status of project', () => {
 });
 
 describe('search based on project and environment', () => {
-  it('released project returns true', () => {
-    const result = searchReleases(projects[0], environments[0], 5);
-    // console.log(result);
-    // expect(result).toBe(true);
+  it('returns null if no releases found', () => {
+    const releasesToKeep = 5;
+    const result = searchReleases(projects[1], environments[0], releasesToKeep);
+    expect(result).toBeDefined;
+    // expect(result.length).toBeLessThanOrEqual(releasesToKeep);
   });
-  // it('unreleased project returns false', () => {
-  //   const result = checkProjectReleaseStatus(projects[1]);
-  //   expect(result).toBe(false);
-  // });
+  it('release list of release of appropriate length', () => {
+    const releasesToKeep = 5;
+    const result = searchReleases(projects[0], environments[1], releasesToKeep);
+    expect(result.length).toBeLessThanOrEqual(releasesToKeep);
+  });
 });
