@@ -30,13 +30,24 @@ export function searchReleases(
   project: Project,
   environment: Environment,
   releasesToKeep: number,
-) {
+): Release[] | null {
   // if project has no releases throw error
-  if (!checkProjectReleaseStatus(project)) return;
-  //
-  //look for corresponding deployed releases via
-  //
-  //sort by date
-  //
-  //trim
+  if (!checkProjectReleaseStatus(project)) return null;
+  // get all releases for project
+  const releaseList = globalReleases.filter(
+    release => release.ProjectId === project.Id,
+  );
+  //look for corresponding deploys via environmentId ASSUMING fewer environments than releases
+  // searchReleases(projectId):releases[]
+  const deployList = globalDeployments.filter(
+    deploy => deploy.EnvironmentId === environment.Id,
+  );
+  //use Date.parse on deploy dates to get most recently deployed releases
+  // deployList.sort
+  const releaseIdskeep = deployList
+    .sort((a, b) => Date.parse(b.DeployedAt) - Date.parse(a.DeployedAt))
+    .map(deploy => deploy.ReleaseId);
+
+  console.log('keeping releases', releaseIdskeep);
+  return globalReleases;
 }
